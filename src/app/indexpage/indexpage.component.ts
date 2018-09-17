@@ -50,8 +50,8 @@ export class IndexpageComponent implements OnInit {
       this.itemCount=0;
       this.popup=i;
       this.temp=i;
-      console.log(i);
-      console.log(this.temp);
+      //console.log(i);
+      //console.log(this.temp);
    }
   
    closeModalDialog(){
@@ -83,7 +83,7 @@ cartpage(){
       if (this.responseData) {
         this.listData = this.responseData;
         
-        console.log(this.listData);
+        //console.log(this.listData);
       }else {
         console.log()
       }
@@ -108,13 +108,13 @@ cartpage(){
 
 selecteditem(id){
   this.data.product_id=id;
-  console.log(id);
+  //console.log(id);
   this.router.navigate(['buyproducts']);
 }
 
   
   ngOnInit () { 
-    console.log(this.storage.get('vicky'));
+    //console.log(this.storage.get('vicky'));
   }
 
   totalPrice(){
@@ -126,7 +126,7 @@ selecteditem(id){
   
   add(pid:Product){
     console.log("Hai");
-    console.log("pid"+pid);
+    //console.log("pid"+pid);
     for(var i=0;i<this.listData.length;i++){
       if(this.listData[i].id === pid.id)
       {  

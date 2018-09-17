@@ -18,13 +18,13 @@ export class UserdashboardComponent implements OnInit {
   updateDetails1 = {"confirmpassword":""};
  
   constructor(public data:ApiService,public router:Router,@Inject(LOCAL_STORAGE) private storage:WebStorageService,public location:Location) {
-    console.log(this.data.user_id);
+    //console.log(this.data.user_id);
 
    }
 
   ngOnInit() {
    this.uid=this.storage.get('vicky_id');
-   console.log(this.uid);
+   //console.log(this.uid);
    this.getUser();
    this.getUserOrders();
   }
@@ -33,11 +33,11 @@ export class UserdashboardComponent implements OnInit {
   getUser(){
     this.data.getUsersById('/users/'.concat(this.uid)).then((result)=>{
       this.responseData = result;
-      console.log(this.responseData);
+      //console.log(this.responseData);
       if (this.responseData) {
        
        this.listData=this.responseData;
-       console.log(this.listData);
+       //console.log(this.listData);
       }else {
         console.log();
       }
@@ -51,12 +51,12 @@ export class UserdashboardComponent implements OnInit {
 //get user orders
 getUserOrders(){
   var uid=this.storage.get('vicky_id');
-  console.log(uid);
+  //console.log(uid);
      this.data.getOrders('/cart/allorders/'.concat(uid)).then((result)=>{
         this.orderData = result;
-        console.log(this.orderData);
+        //console.log(this.orderData);
         //this.product=this.orderData[0];
-        console.log(this.orderData);
+        //console.log(this.orderData);
       }, (err) => {
           console.log("Rejection");
       }).catch((err)=>{
@@ -66,7 +66,7 @@ getUserOrders(){
 
 //update user by id
 updateProfile(){
-console.log(this.uid);
+//console.log(this.uid);
 if(this.updateDetails!=null){
     if(this.updateDetails.password==this.updateDetails1.confirmpassword){
           this.data.updateDetails(this.listData,'/users/'.concat(this.uid)).then((result)=> {

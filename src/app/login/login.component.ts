@@ -36,12 +36,12 @@ export class LoginComponent implements OnInit {
      //this.data.username=username;
     this.data.getUsers('/users').then((result)=>{
       this.responseData = result;
-      console.log(this.responseData);
+      //console.log(this.responseData);
       if (this.responseData) {
         this.listData = this.responseData;
-       console.log(this.listData.length);
+       //console.log(this.listData.length);
         for(var i=0;i<this.listData.length;i++){
-          console.log(username==this.listData[i].username && password==this.listData[i].password);
+          //console.log(username==this.listData[i].username && password==this.listData[i].password);
           if(username==this.listData[i].username && password==this.listData[i].password){
             this.data.username=this.listData[i].name;
             this.data.phno=this.listData[i].mobile_number;
@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
 changepassword(){
   this.data.getUsers('/users').then((result)=>{
     this.responseData = result;
-    console.log(this.responseData);
+    //console.log(this.responseData);
     if (this.responseData) {
       this.listData = this.responseData;
       //console.log(this.listData);
@@ -119,7 +119,7 @@ changepassword(){
          //console.log(this.providerDetail1.phno);
          this.storage.set('vicky_phno',this.providerDetail1.phno);
          this.username=this.listData[i].username;
-         console.log(this.listData[i].mobile_number);
+         //console.log(this.listData[i].mobile_number);
         // this.data.username=this.listData[i].name;
          //this.data.uid=this.listData[i].uid;
          this.forgotsttaus=true;

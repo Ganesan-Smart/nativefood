@@ -54,7 +54,7 @@ export class CheckoutComponent implements OnInit {
           if(this.username==this.listData[i].username){
             this.address=this.listData[i].address;
              
-          console.log(this.address);           
+          //console.log(this.address);           
          }else{
           console.log('you are unauthenticted');
         } 
@@ -113,14 +113,14 @@ console.log(uid);
    this.data.getUserOrders('/cart/'.concat(uid)).then((result)=>{
       this.orderData = result;
       //this.product=this.orderData[0];
-      console.log(this.orderData.food_name);
+      //console.log(this.orderData.food_name);
       //this.storage.remove('vicky_orderid');
     }, (err) => {
         console.log("Rejection");
     }).catch((err)=>{
       console.log('unHandledRejection', err.message);
     });
-    console.log(uid);
+    //console.log(uid);
 }
 //update status
 // postOrders(){

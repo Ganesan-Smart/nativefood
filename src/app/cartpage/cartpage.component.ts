@@ -76,7 +76,7 @@ export class CartpageComponent {
           //console.log(this.response[i].id);
           //console.log(this.response[i].delivery_address); 
         if(this.storage.get('vicky')){
-       console.log(this.rv);
+       //console.log(this.rv);
        //console.log(response1[i]);
        this.data.postDetails(this.rv, "/cart").then((result) =>{
               var results = this.rv;

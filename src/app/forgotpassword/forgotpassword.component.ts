@@ -34,8 +34,8 @@ public phno: number;
             this.username=this.listData[i].username;
             this.storage.set('user_id',this.listData[i].fid);
             this.storage.set('vicky_uname',this.listData[i].username);
-          console.log(this.username);
-          console.log(this.answer);           
+          //console.log(this.username);
+          //console.log(this.answer);           
          }else{
           console.log('you are unauthenticted');
         } 
@@ -55,7 +55,7 @@ public phno: number;
 submit(e){
   e.preventDefault();
   var answer=e.target.elements[0].value;
-  console.log(answer);
+  //console.log(answer);
   //var username =e.target.elements[1].value;
     if(answer==this.answer){
      alert("you are allowed to change password");

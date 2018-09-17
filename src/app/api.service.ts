@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { LOCAL_STORAGE,WebStorageService } from 'angular-webstorage-service';
 
-let apiURL = "http://192.168.1.35:3000/api";
+let apiURL = "http://103.207.1.123:81/api";
 
 @Injectable({
   providedIn: 'root'
