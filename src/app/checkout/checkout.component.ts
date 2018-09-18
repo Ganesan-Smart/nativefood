@@ -11,6 +11,7 @@ declare let paypal: any;
 export class CheckoutComponent implements OnInit {
   public responseData: any;
   public listData: any;
+  public listData1: any;
   public orderData:any;
   public product={"order_id":"","user_id":"","product_id":"","product_name":"","user_name":"","lon":"","lat":"","zoom":"","address":"","cost":"","income":"","quantity":"","providerId":"","provider":"","status":"","tax":"","createdAt":"","updatedAt":""};
   public address:String;
@@ -25,6 +26,7 @@ export class CheckoutComponent implements OnInit {
   public tax:number=0;
   public finalAmount:number;
   public status:String;
+  public food_image:String;
   public updateStatus={"order_id":"","user_id":"","product_id":"","product_name":"","user_name":"","lon":"","lat":"","zoom":"","address":"","cost":"","income":"","quantity":"","providerId":"","provider":"","status":"","tax":"","createdAt":"","updatedAt":""};
   constructor(public router:Router,public data:ApiService,@Inject(LOCAL_STORAGE) private storage:WebStorageService) {
    
@@ -54,7 +56,7 @@ export class CheckoutComponent implements OnInit {
           if(this.username==this.listData[i].username){
             this.address=this.listData[i].address;
              
-          //console.log(this.address);           
+          console.log(this.address);           
          }else{
           console.log('you are unauthenticted');
         } 
@@ -69,10 +71,13 @@ export class CheckoutComponent implements OnInit {
       console.log('unHandledRejection', err.message);
     });
     this.getUserOrders();
+    this.getFood();
     //this.status="checkedout";
     //this.postOrders();  
   }
-  //new address show or hide
+
+
+//new address show or hide
   addrtoggle() {
     this.newaddress = !this.newaddress;
    }
@@ -112,15 +117,28 @@ var uid=this.storage.get('vicky_orderid');
 console.log(uid);
    this.data.getUserOrders('/cart/'.concat(uid)).then((result)=>{
       this.orderData = result;
+      this.food_image=this.orderData.food_image;
       //this.product=this.orderData[0];
-      //console.log(this.orderData.food_name);
+      console.log(this.orderData);
       //this.storage.remove('vicky_orderid');
     }, (err) => {
         console.log("Rejection");
     }).catch((err)=>{
       console.log('unHandledRejection', err.message);
     });
-    //console.log(uid);
+    console.log(uid);
+}
+
+//get all food details
+getFood(){
+this.data.loadData("/items").then((result)=>{
+  this.listData1 = result;
+ console.log(this.listData1);
+}, (err) => {
+    console.log("Rejection");
+}).catch((err)=>{
+  console.log('unHandledRejection', err.message);
+});
 }
 //update status
 // postOrders(){
@@ -139,6 +157,40 @@ console.log(uid);
 // });
 // alert(this.status);
 // }
+
+     //update food quantity
+     updateItems(){
+       console.log(this.listData1);//all foods
+       console.log(this.orderData);//user order
+       for(var i=0;i<1;i++){
+         for(var j=0;j<this.listData1.length;j++){
+          //console.log(this.listData1[j].name);
+          //console.log(this.orderData.food_name);
+           if(this.orderData.food_name==this.listData1[j].name){
+             var quantity=this.orderData.quantity;
+             console.log(this.listData1[j].available);
+             //console.log(this.listData1[j].available-this.orderData.quantity);
+             this.listData1[j].available=this.listData1[j].available-quantity;
+             console.log(this.listData1[j].available);
+            var available= this.listData1[j].available;
+            var food_id=this.listData1[j].id;
+            var data={"available":available};
+            console.log(data);
+             //update available items count
+             this.data.updateDetails(data,'/items/updatequantity/'.concat(food_id)).then((result)=> {
+              console.log("success");
+            },(err)=>{
+              console.log();
+        }).catch((err)=>{
+              console.log("unhandled rejection",err.message);
+           });
+           }
+         }
+       }
+
+     
+
+  }
 
   //  payment tab
   addScript: boolean = false;
@@ -175,6 +227,7 @@ console.log(uid);
         //localStorage.clear();
         this.status="checkedout";
         //this.postOrders();
+      this.updateItems();    
         this.router.navigate(['/']);
       })
     }
