@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { LOCAL_STORAGE,WebStorageService } from 'angular-webstorage-service';
 
-let apiURL = "http://103.207.1.123:81/api";
+let apiURL = "http://api-nativefood.herokuapp.com/api";
 
 @Injectable({
   providedIn: 'root'
